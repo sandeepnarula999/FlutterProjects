@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // Application name
+      title: 'Flutter Hello World',
+      // Application theme data, you can set the colors for the application as
+      // you want
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // A widget which will be started on application startup
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          // The title text which will be shown on the action bar
+          title: Text("Dont be a normal user"),
+          backgroundColor: Colors.green,
+        ),
+        body: SafeArea(
+          child:
+              //child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.start,
+              Container(
+            height: 250,
+            color: Color.fromRGBO(225, 232, 237, .9),
+            child: ListTile(
+              //leading: Icon(
+              //Icons.person_add,
+              //color: Colors.red,
+              //),
+              leading: Text('50 % off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
+              title: Text("Star for 3 Months", style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text("Rs 3000", style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+              trailing: ElevatedButton(
+                child: Text('\u{20B9} 99     Pay Now'),
+                onPressed: () => print("3months membership"),
+                style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
+              ),
+              onTap: () {
+                print("Tapped");
+              },
+              onLongPress: () => print("Long pressed"),
+              //),
+            ),
+          ),
+        ));
+  }
+}
