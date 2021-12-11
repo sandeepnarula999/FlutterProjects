@@ -1,67 +1,59 @@
-import 'package:flutter/material.dart';
+// make pay.dart under lib folder and copy the beolow commented lines
+//  class Payplan {
+//  int weeks, finalpay, basepay, discount;
+//  Payplan({int wk, int fp, int bp, int dis}) {
+//    weeks = wk;
+//    finalpay = fp;
+//    basepay = bp;
+//    discount = dis;
+//  }
+//}
 
+import 'package:flutter/material.dart';
+import 'pay.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+  //payment plans and memberships weeks=wk, finalpay=fp, basepay = bp
+  List plans = [
+    Payplan(wk: 11, fp: 19999, bp: 19999),
+    Payplan(wk: 1, fp: 299, bp: 500),
+    Payplan(wk: 4, fp: 499, bp: 1000),
+    Payplan(wk: 12, fp: 999, bp: 3000),
+    Payplan(wk: 48, fp: 2999, bp: 1200),
+    Payplan(wk: 120, fp: 9999, bp: 120000),
+  ];
+
+  int plannumber = 0;
+  double discount = 0;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(),
-    );
+    return new MaterialApp(title: "ListView.builder", theme: new ThemeData(primarySwatch: Colors.green), debugShowCheckedModeBanner: false, home: new ListViewBuilder());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class ListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // The title text which will be shown on the action bar
-          title: Text("Dont be a normal user"),
-          backgroundColor: Colors.green,
-        ),
-        body: SafeArea(
-          child:
-              //child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              //mainAxisAlignment: MainAxisAlignment.start,
-              Container(
-            height: 250,
-            color: Color.fromRGBO(225, 232, 237, .9),
-            child: ListTile(
-              //leading: Icon(
-              //Icons.person_add,
-              //color: Colors.red,
-              //),
+      //appBar: AppBar(title: Text("ListView.builder")),
+      body: ListView.builder(
+          itemCount: 7,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
               leading: Text('50 % off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
-              title: Text("Star for 3 Months", style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text("Rs 3000", style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+              subtitle: Text('plans[plannumber].bp', style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+              title: Text('plans[plannumber].wk', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(110, 119, 134, .9))),
               trailing: ElevatedButton(
-                child: Text('\u{20B9} 99     Pay Now'),
+                child: Text('\u{20B9} plans[plannumber].fp'),
                 onPressed: () => print("3months membership"),
                 style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
               ),
-              onTap: () {
-                print("Tapped");
-              },
-              onLongPress: () => print("Long pressed"),
-              //),
-            ),
-          ),
-        ));
+            );
+          }),
+    );
   }
 }
