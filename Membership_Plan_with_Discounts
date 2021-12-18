@@ -1,0 +1,186 @@
+// make a file named pay.dart under lib folder and copy the beolow commented lines
+// class Payplan {
+//   // final weeks;
+//   // final basepay;
+//   // final weekendpay;
+//   // final augustpay;
+//   // final octoberpay;
+//   // final decemberpay;
+//   // final febpay;
+//   // final discount;
+//   // Payplan({this.weeks, this.basepay, this.weekendpay, this.augustpay, this.octoberpay, this.decemberpay, this.febpay, this.discount});
+// }
+
+import 'package:flutter/material.dart';
+import 'pay.dart';
+//import 'package:countdown_flutter/countdown_flutter.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // Application name
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // A widget which will be started on application startup
+      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<Payplan> plans = [
+    Payplan(weeks: 11, basepay: 29999, weekendpay: 19999),
+    Payplan(weeks: 1, basepay: 500, weekendpay: 299),
+    Payplan(weeks: 4, basepay: 1000, weekendpay: 499),
+    Payplan(weeks: 13, basepay: 3000, weekendpay: 999),
+    Payplan(weeks: 52, basepay: 12000, weekendpay: 2999, augustpay: 2666, octoberpay: 2333, decemberpay: 2111, febpay: 2001),
+    Payplan(weeks: 520, basepay: 120000, weekendpay: 9999, augustpay: 8888, octoberpay: 7777, decemberpay: 6666, febpay: 5555),
+    Payplan(weeks: 52, basepay: 29999, weekendpay: 29999),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    showDesc() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Plan details"),
+              content: ListTile(leading: Icon(Icons.person), title: Text("This is a description")),
+            );
+          });
+    }
+
+    return Scaffold(
+      body: Center(
+          child: Column(
+        children: [
+          SizedBox(height: 6),
+          Text("Dont be a normal user. Buy NOW!", textScaleFactor: 1.1, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          SizedBox(height: 3),
+          Card(
+            color: Color(0xFFE1E8ED),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 3),
+                Row(
+                  children: [
+                    Icon(Icons.chat),
+                    Text(" Chat Only plan", textScaleFactor: 1.1, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                    TextButton(onPressed: () => showDesc(), child: Text("                               Plan Details"))
+                  ],
+                ),
+                ListTile(
+                  leading: Text('   of ${plans[1].weeks * 7} days', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  subtitle: Text('\u{20B9} ${plans[1].basepay}', style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+                  title: Text('%off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
+                  trailing: ElevatedButton(
+                    child: Text(' \u{20B9} ${plans[1].weekendpay} Pay Now'),
+                    onPressed: () => print("{plans[1].weeks * 7} days membership"),
+                    style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
+                  ), // trailing end
+                ), // list tile end
+              ], // children of column
+            ), //column
+          ), // card 1 end
+          Card(
+            color: Color(0xFFE1E8ED),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.two_wheeler_rounded),
+                    Text(" 'Star' Membership plan", textScaleFactor: 1.1, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                    TextButton(onPressed: () => showDesc(), child: Text("                Plan details"))
+                  ],
+                ),
+                for (int i = 3; i < plans.length - 1; i++)
+                  ListTile(
+                    leading: Text('   of ${plans[i].weeks * 7} days', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                    subtitle: Text('\u{20B9} ${plans[i].basepay}', style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+                    title: Text('%off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
+                    trailing: ElevatedButton(
+                      child: Text(' \u{20B9} ${plans[i].weekendpay} Pay Now'),
+                      onPressed: () => print("{plans[i].weeks * 7} days membership"),
+                      style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
+                    ),
+                  ),
+              ],
+            ),
+          ), // card 2 end
+          Card(
+            color: Color(0xFFE1E8ED),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 3),
+                Row(
+                  children: [
+                    Icon(Icons.directions_car),
+                    Text(" 'Super Star' Membership plan", textScaleFactor: 1.1, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                    TextButton(onPressed: () => showDesc(), child: Text("     Plan details"))
+                  ],
+                ),
+                ListTile(
+                  leading: Text('   of ${plans[plans.length - 1].weeks * 7} days', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  subtitle: Text('\u{20B9} ${plans[plans.length - 1].basepay}', style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+                  title: Text('%off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
+                  trailing: ElevatedButton(
+                    child: Text(' \u{20B9} ${plans[plans.length - 1].weekendpay} Pay Now'),
+                    onPressed: () => print("{plans[plans.length-1].weeks * 7} days membership"),
+                    style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
+                  ), // trailing end
+                ), // list tile end
+              ], //children
+            ), //column
+          ), //card 3 end
+          Card(
+            color: Color(0xFFE1E8ED),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                SizedBox(height: 3),
+                Row(
+                  children: [
+                    Icon(Icons.location_history_rounded),
+                    Text(" Personal Assistant plan", textScaleFactor: 1.1, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                    TextButton(onPressed: () => showDesc(), child: Text("                 Plan details"))
+                  ],
+                ),
+                ListTile(
+                  leading: Text('   of ${plans[0].weeks * 7} days', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  //subtitle: Text('\u{20B9} ${plans[0].basepay}', style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.lineThrough)),
+                  //title: Text('%off', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 153, 0, .9))),
+                  trailing: ElevatedButton(
+                    child: Text(' \u{20B9} ${plans[0].weekendpay} Pay Now'),
+                    onPressed: () => print("{plans[0].weeks * 7} days membership"),
+                    style: ElevatedButton.styleFrom(primary: Color.fromRGBO(255, 153, 0, .9)),
+                  ),
+                ),
+              ], //children
+            ),
+          ), // card 4 end
+          SizedBox(height: 10),
+          Text("Discount Ends in", textScaleFactor: 1.1, style: TextStyle(color: Color.fromRGBO(255, 153, 0, .9), fontWeight: FontWeight.bold)),
+          Text("29 Days: 23 Hours: 59 Minutes: 59 Seconds", textScaleFactor: 0.95, style: TextStyle(color: Color.fromRGBO(255, 153, 0, .9), fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          TextButton(onPressed: () => showDesc(), child: Text("                                                        Success Stories", style: TextStyle(color: Colors.black))),
+        ], // scaffold column children end
+      )), // scaffold column end
+    );
+  }
+}
