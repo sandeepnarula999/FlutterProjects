@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+
+
+bool swapFailureTrigger = false;
+// If TRUE, scrolling works well when grabbing an open expansion tile list
+// If FALSE, scrolling only works if we grab a parent list OUTSIDE the items of the open expansion tile
+
+class EntryItem extends StatelessWidget {
+  const EntryItem(this.entry);
+
+  final Entry entry;
+
+  Widget _buildTiles(Entry root) {
+    if (root.children.isEmpty)
+      return ListTile(
+        title: Text(root.title), //subtitle: Text(root.subtitle),
+      );
+
+    var kids = root.children.map((child) => _buildTiles(child)).toList();
+
+    return ExpansionTile(
+      key: PageStorageKey<Entry>(root),
+      title: Text(root.title),
+      //subtitle: Text(root.subtitle),
+
+      // <<---------- PROBLEM IS HERE if you test with the ListView.builder() version ---------->>
+      children: swapFailureTrigger
+          ? root.children.map(_buildTiles).toList()
+          : <Widget>[
+              ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                // helps scroll all 6 items in list *not working*
+                key: PageStorageKey<Entry>(root),
+                itemCount: kids.length,
+                itemBuilder: (context, index) {
+                  return kids[index];
+                },
+                //shrinkWrap: true,
+                //physics: ClampingScrollPhysics(), // for List View to scroll
+              )
+            ],
+      //  <<--------------------------------------------------------------------------------->>
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildTiles(entry);
+  }
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of our application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: ''), //Flutter Expansion Issue'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ExpansionTileExample(),
+    );
+  }
+}
+
+class ExpansionTileExample extends StatelessWidget {
+  const ExpansionTileExample({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => EntryItem(data[index]),
+      itemCount: data.length,
+    );
+  }
+}
+
+// One entry in the multilevel list displayed by this app.
+class Entry {
+  const Entry(this.title, [this.children = const <Entry>[]]);
+  final String title;
+  final List<Entry> children;
+}
+
+// Data to display.
+const List<Entry> data = <Entry>[
+  Entry(
+    'Day1',
+    <Entry>[
+      Entry('Topic T1.1'),
+      Entry('Topic T1.2'),
+      Entry('Toipc T1.3'),
+      Entry('Topic T1.4'),
+      Entry('Topic T1.5'),
+      Entry('Topic T1.6'),
+    ],
+  ),
+];
