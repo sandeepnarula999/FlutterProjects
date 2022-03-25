@@ -13,6 +13,33 @@ class EntryItem extends StatelessWidget {
     if (root.children.isEmpty) {
       return ListTile(
         title: Text(root.title),
+        trailing: FittedBox(
+          fit: BoxFit.fill,
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.auto_stories),
+                iconSize: 30,
+                tooltip: 'Documents',
+              ),
+              SizedBox(width: 10.0),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.video_collection_rounded),
+                iconSize: 30,
+                tooltip: 'Videos',
+              ),
+              SizedBox(width: 10.0),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.favorite),
+                iconSize: 20,
+                tooltip: 'Shortlist',
+              ),
+            ],
+          ),
+        ),
         subtitle: root.subtitle == null ? null : Text(root.subtitle!),
       );
     }
@@ -103,8 +130,7 @@ class ExpansionTileExample extends StatelessWidget {
 // One entry in the multilevel list displayed by this app.
 class Entry {
   //Change the constructor to set each parameter and skip subtitle on root
-  const Entry(
-      {required this.title, this.children = const <Entry>[], this.subtitle});
+  const Entry({required this.title, this.children = const <Entry>[], this.subtitle});
   final String title;
   final List<Entry> children;
   final String? subtitle; // Can be null so root won`t have it
