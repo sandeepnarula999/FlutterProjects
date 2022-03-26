@@ -73,8 +73,15 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     indicatorWeight: 6,
                     tabs: <Widget>[
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.pedal_bike_outlined,
+                              //Icons.phone_android,
+
+                              //   color: Colors.green,
+                              size: 23.0,
+                            ),
                             Text(
                               "Process",
                               textAlign: TextAlign.start,
@@ -83,19 +90,19 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                             // SizedBox(
                             //   width: 5.0,
                             // ),
-                            // Icon(
-                            //   Icons.pedal_bike_outlined,
-                            //   //Icons.phone_android,
-
-                            //   color: Colors.green,
-                            //   size: 33.0,
-                            // ),
                           ],
                         ),
                       ),
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.moped,
+                              //   //Icons.smart_display_rounded,
+                              //   //Icons.subscriptions_rounded,
+                              size: 23.0,
+                              //   color: Colors.blue,
+                            ),
                             Text(
                               "Tech",
                               textAlign: TextAlign.start,
@@ -104,19 +111,17 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                             // SizedBox(
                             //   width: 3.0,
                             // ),
-                            // Icon(
-                            //   Icons.moped,
-                            //   //Icons.smart_display_rounded,
-                            //   //Icons.subscriptions_rounded,
-                            //   size: 33.0,
-                            //   color: Colors.blue,
-                            // ),
                           ],
                         ),
                       ),
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.two_wheeler,
+                              size: 23.0,
+                              //   color: Colors.amber,
+                            ),
                             Text(
                               "Tools",
                               textAlign: TextAlign.start,
@@ -125,17 +130,17 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                             // SizedBox(
                             //   width: 5.0,
                             // ),
-                            // Icon(
-                            //   Icons.two_wheeler,
-                            //   size: 33.0,
-                            //   color: Colors.amber,
-                            // ),
                           ],
                         ),
                       ),
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.agriculture,
+                              size: 23.0,
+                              //   color: Colors.amber,
+                            ),
                             Text(
                               "Comm",
                               textAlign: TextAlign.start,
@@ -153,8 +158,13 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         ),
                       ),
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.airport_shuttle,
+                              size: 23.0,
+                              //   color: Colors.amber,
+                            ),
                             Text(
                               "KB",
                               textAlign: TextAlign.start,
@@ -172,8 +182,13 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         ),
                       ),
                       Tab(
-                        child: Row(
+                        child: Column(
                           children: <Widget>[
+                            Icon(
+                              Icons.electric_rickshaw,
+                              size: 23.0,
+                              //   color: Colors.amber,
+                            ),
                             Text(
                               "Adhoc",
                               textAlign: TextAlign.start,
