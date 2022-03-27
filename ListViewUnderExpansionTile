@@ -13,34 +13,39 @@ class EntryItem extends StatelessWidget {
     if (root.children.isEmpty) {
       return ListTile(
         title: Text(root.title),
-        trailing: FittedBox(
-          fit: BoxFit.fill,
-          child: Row(
-            children: <Widget>[
-              IconButton(
+        subtitle: root.subtitle == null ? null : Text(root.subtitle!),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.auto_stories),
                 iconSize: 30,
                 tooltip: 'Documents',
               ),
-              SizedBox(width: 10.0),
-              IconButton(
+              flex: 1,
+            ),
+            Flexible(
+              child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.video_collection_rounded),
                 iconSize: 30,
                 tooltip: 'Videos',
               ),
-              SizedBox(width: 10.0),
-              IconButton(
+              flex: 1,
+            ),
+            Flexible(
+              child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.favorite),
                 iconSize: 20,
                 tooltip: 'Shortlist',
               ),
-            ],
-          ),
+              flex: 1,
+            ),
+          ],
         ),
-        subtitle: root.subtitle == null ? null : Text(root.subtitle!),
       );
     }
 
@@ -90,7 +95,7 @@ class MyApp extends StatelessWidget {
       //title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
       ),
       home: MyHomePage(title: ''), //Flutter Expansion Issue'),
     );
